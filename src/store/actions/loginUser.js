@@ -1,17 +1,13 @@
+import axios from 'axios'
+
 export const LOGIN_USER = "LOGIN_USER"
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS"
 export const LOGIN_ERROR = "LOGIN_ERROR"
 
-const loginUser = (dispatch, data) => {
-    dispatch({type: LOGIN_USER})
-    fetch('https://storemanagerapi2.herokuapp.com', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(res => res.json())
+const loginUser = data => dispatch => {
+    console.log("Dispatch data: ", data)
+    dispatch({type: LOGIN_USER}, data)
+    axios.post('https://storemanagerapi2.herokuapp.com/api/v2/auth/login', data)
     .then(res => {
         console.log(res)
         dispatch({type: LOGIN_SUCCESS, payload: res.data})
