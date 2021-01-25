@@ -3,16 +3,6 @@
     background: #e6e6e6;
 }
 
-.landingImageDiv {
-    /* display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden */
-    /* background-image: url("../../assets/images/landing.jpg"); */
-    /* background-image: linear-gradient(to top, #24c6dc -30%, #2b2a2a 100%),
-    url("../../assets/images/landing.jpg"); */
-}
-
 .landingImage {
     flex-shrink: 0;
     width: 50vw;
@@ -20,25 +10,18 @@
     object-fit: cover;
 }
 
-/* .login-div {
-    width: 632px;
-    height: 683px;
-    padding: 36px 121px 138px 100.5px;
-    border-radius: 5px;
-    background-color: #ffffff;
-  } */
 
   .home-sub {
       display: flex;
       align-items: center;
-      padding-left: 50px;
+      /* padding-left: 50px; */
+      justify-content: center;
+      width: 100%;
   }
   .login-div {
     /* width: 100%; */
-    width: 450px;
-    height: 35vw;
-    height: 500px;
-  /* padding: 36px 121px 138px 100.5px; */
+    width: 65%;
+    height: 65%;
     border-radius: 5px;
     background-color: #ffffff;
   }
@@ -50,7 +33,6 @@
   .loginForm {
       display: flex;
       flex-direction: column;
-      
   }
 
   .loginForm > input {

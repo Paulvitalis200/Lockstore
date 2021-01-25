@@ -1,12 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import landing from '../../assets/images/landing.jpg';
 import './landing.css';
+import loginUser from '../../store/actions/loginUser'
 
 const LandingPage = () => {
     return (
         <div className="home">
             <div className="landingImageDiv">
-                <img className="landingImage" src={landing} alt="Landing image"/>
+                <img className="landingImage" src={landing} alt=""/>
             </div>
             <div className="home-sub">
                 <div className="login-div">
@@ -27,4 +29,16 @@ const LandingPage = () => {
     )
 }
 
-export default LandingPage;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loginUser: () => dispatch(loginUser)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LandingPage);
