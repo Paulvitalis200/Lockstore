@@ -33,7 +33,8 @@ const loginUserReducer = (state = initialState, {type, payload}) => {
                 ...payload,
                 isAuthenticated: false,
                 loading: false,
-                isError: true
+                isError: true,
+                errors: {payload}
             }
         default:
             return state

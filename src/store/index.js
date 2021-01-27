@@ -9,7 +9,7 @@ const reducers = combineReducers({
 })
 
 const initialState = {
-    auth: {}
+    
 }
 
 const store = createStore(reducers, initialState, compose(applyMiddleware(...middleware), 

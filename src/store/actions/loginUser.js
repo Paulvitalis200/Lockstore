@@ -13,7 +13,7 @@ const loginUser = data => dispatch => {
         dispatch({type: LOGIN_SUCCESS, payload: res.data})
     })
     .catch((error) => {
-        dispatch({type: LOGIN_ERROR, payload: error})
+        dispatch({ type: LOGIN_ERROR, payload: error.response.data })
         console.log("Error: ", error)
     })
 }
