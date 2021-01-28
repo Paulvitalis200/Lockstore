@@ -18,13 +18,13 @@ const LandingPage = (props) => {
         props.history.push('/dashboard')
       }, 3000) 
     }
-  }, [props.auth, props.errors, props.history])
+  }, [props, props.auth, props.errors, props.history])
 
   useEffect(() => {
     if(props.auth.isError) {
       setMessage(props.auth.message)
     }
-  }, [props.auth.isError])
+  }, [props, props.auth.isError])
 
   const onSubmit = (data) => {
     console.log(data)
