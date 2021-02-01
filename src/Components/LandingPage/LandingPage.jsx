@@ -1,10 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import landing from '../../assets/images/landing.jpg';
 import './landing.css';
 import loginUser from '../../store/actions/loginUser'
+import { useForm } from 'react-hook-form';
 
-const LandingPage = () => {
+const LandingPage = (props) => {
+    const { register, handleSubmit, errors } = useForm();
+
+    const [formError, setFormError] = useState();
+    const [isLoading, setLoading] = useState(props.auth.loading)
+
+    useEffect(() => {
+        if (props.auth.isError) {
+            setFormError(props.auth.message)
+            setLoading(false)
+            return
+        }
+        setFormError('')
+    }, [props])
+
+    const onSubmit = (data) => {
+        setLoading(true)
+        console.log("Agian")
+        props.loginUser(data)
+    }
+
     return (
         <div className="home">
             <div className="landingImageDiv">
@@ -14,15 +35,19 @@ const LandingPage = () => {
                 <div className="login-div">
                     <div>
                         <h1 className="loginHeader">Log In</h1>
-                        <form>
+                        <form onSubmit={handleSubmit(onSubmit)} >
                             <div className="loginForm">
-                                <input placeholder="Email"/>
-                                <input placeholder="Password"/>
+                                <input type="text" name="email" placeholder="Email" ref={register({required: true})} />
+                                {errors.email && <p>Email is required.</p>}
+                                <input type="text" name="password" placeholder="Password" ref={register({required: true})} />
+                                {errors.password && <p>Password is required.</p>}
+                                {formError && <p>{formError}</p>}
                             </div>
-                            <button className="login-btn">LOG IN</button>
+                            <button className="login-btn">
+                                {isLoading && <div id='mini-loader'></div>}
+                                LOG IN</button>
                         </form>
                     </div>
-                    
                 </div>
             </div>
         </div>
@@ -31,13 +56,13 @@ const LandingPage = () => {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user
+    auth: state.auth
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loginUser: () => dispatch(loginUser)
+    loginUser: (data) => dispatch(loginUser(data))
   }
 }
 

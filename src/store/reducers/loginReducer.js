@@ -25,6 +25,7 @@ const loginUserReducer = (state = initialState, {type, payload}) => {
                 isAuthenticated: true,
                 loading: false,
                 errors: {},
+                isError: false,
                 success: true
             }
         case LOGIN_ERROR:
