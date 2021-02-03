@@ -12,12 +12,22 @@ const LandingPage = (props) => {
     const [isLoading, setLoading] = useState(props.auth.loading)
 
     useEffect(() => {
+        console.log(props)
         if (props.auth.isError) {
             setFormError(props.auth.message)
             setLoading(false)
             return
         }
         setFormError('')
+    }, [props])
+
+    useEffect(() => {
+        if (props.auth.isAuthenticated) {
+            setLoading(false)
+            setTimeout(() => {
+                props.history.push('/dashboard')
+            }, 5000)
+        }
     }, [props])
 
     const onSubmit = (data) => {

@@ -1,4 +1,4 @@
-import { LOGIN_ERROR, LOGIN_SUCCESS, LOGIN_USER } from '../actions/loginUser';
+import { LOGIN_ERROR, LOGIN_SUCCESS, LOGIN_USER, SET_CURRENT_USER } from '../actions/loginUser';
 
 const initialState = {
     isAuthenticated: false,
@@ -8,6 +8,8 @@ const initialState = {
     success: false,
     isError: false
   }
+  
+const isEmpty = require('is-empty')
 const loginUserReducer = (state = initialState, {type, payload}) => {
     switch(type) {
         case LOGIN_USER:
@@ -36,6 +38,13 @@ const loginUserReducer = (state = initialState, {type, payload}) => {
                 loading: false,
                 isError: true
             }
+        case SET_CURRENT_USER:
+            return {
+                ...state,
+                isAuthenticated: !isEmpty(payload),
+                user: payload,
+                loading: true
+              }
         default:
             return state
     }
